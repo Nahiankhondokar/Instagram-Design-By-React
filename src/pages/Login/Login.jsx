@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import { GrFacebook } from "react-icons/gr";
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,8 +7,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import AuthFooter from '../../components/AuthFooter/AuthFooter';
 import cookie from 'js-cookie';
 import './Login.scss';
+import AuthContext from '../../context/AuthContext';
 
 const Login = () => {
+
+
+    // reducer 
+    const {dispatch} = useContext(AuthContext)
 
     // navigate
     const navigate = useNavigate();
@@ -61,6 +66,7 @@ const Login = () => {
 
                     cookie.set("token", res.data.token);
                     cookie.set("user", JSON.stringify(res.data.user));
+                    dispatch({ type : 'LOGIN_USER', payload : res.data});
                     navigate('/');
 
                     console.log(res.data);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TopBar from '../../components/TopBar/TopBar';
 import AuthTemp from '../AuthTemp/AuthTemp';
 import { BsThreeDots, BsEmojiSmile } from "react-icons/bs";
@@ -6,8 +6,15 @@ import { AiOutlineHeart, AiOutlineComment } from "react-icons/ai";
 import { HiOutlineSaveAs } from "react-icons/hi";
 import { RiShareLine } from "react-icons/ri";
 import './Home.scss';
+import AuthContext from '../../context/AuthContext';
 
 const Home = () => {
+
+  // reducer
+  const { token } = useContext(AuthContext);
+
+  console.log(token);
+
   return (
     <div>
       <TopBar />
@@ -186,7 +193,7 @@ const Home = () => {
               <span><a href="#">Nahian</a>Nahi</span>
             </div>
             
-            <a href="#">Switch</a>
+            <a href="#">Logout</a>
           </div>
        </div>
       </div>
