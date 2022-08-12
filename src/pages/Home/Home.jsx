@@ -5,15 +5,26 @@ import { BsThreeDots, BsEmojiSmile } from "react-icons/bs";
 import { AiOutlineHeart, AiOutlineComment } from "react-icons/ai";
 import { HiOutlineSaveAs } from "react-icons/hi";
 import { RiShareLine } from "react-icons/ri";
-import './Home.scss';
 import AuthContext from '../../context/AuthContext';
+import cookie from 'js-cookie';
+import './Home.scss';
 
 const Home = () => {
 
-  // reducer
-  const { token } = useContext(AuthContext);
+  // auth context
+  const { token, dispatch } = useContext(AuthContext);
 
-  console.log(token);
+
+  // user logout
+  const handleUserLogout = (e) => {
+    e.preventDefault();
+
+    cookie.remove('token');
+    cookie.remove('user');
+
+    dispatch({ type : "USER_LOGOUT" });
+
+  }
 
   return (
     <div>
@@ -193,7 +204,7 @@ const Home = () => {
               <span><a href="#">Nahian</a>Nahi</span>
             </div>
             
-            <a href="#">Logout</a>
+            <a href="#" onClick={handleUserLogout}>Logout</a>
           </div>
        </div>
       </div>
