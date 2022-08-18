@@ -8,11 +8,15 @@ import { RiShareLine } from "react-icons/ri";
 import AuthContext from '../../context/AuthContext';
 import cookie from 'js-cookie';
 import './Home.scss';
+import LoaderContext from '../../context/LoaderContext';
 
 const Home = () => {
 
   // auth context
-  const { token, dispatch } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
+
+  // loader context
+  const { loaderDispatch } = useContext(LoaderContext);
 
 
   // user logout
@@ -23,6 +27,7 @@ const Home = () => {
     cookie.remove('user');
 
     dispatch({ type : "USER_LOGOUT" });
+    loaderDispatch({ type : "LOADER_START" });
 
   }
 
@@ -39,9 +44,9 @@ const Home = () => {
             <div className="post-card shadow-sm">
               <div className="post-card-header">
                 <div className="post-user-info">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Katherine_Langford_in_2018.jpg" alt="" width="200"/>
+                  <img src={ user.photo ? user.photo : 'https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg'} alt="" width="200"/>
                   <div className="user-details">
-                    <a href="" className="user-name">Nahian</a>
+                    <a href="" className="user-name">{ user.name }</a>
                     <span className='location'>Dhaka</span>
                   </div>
                 </div>
@@ -200,8 +205,8 @@ const Home = () => {
 
           <div className="user-info">
             <div className="user-personal-info">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Katherine_Langford_in_2018.jpg" alt=""/>
-              <span><a href="#">Nahian</a>Nahi</span>
+              <img src={ user.photo ? user.photo : 'https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg'} alt=""/>
+              <span><a href="#">{user.name}</a>{user.username}</span>
             </div>
             
             <a href="#" onClick={handleUserLogout}>Logout</a>

@@ -4,6 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthContextProvider from './providers/AuthContextProvider';
+import LoaderContextProvider from './providers/LoaderContextProvider';
 
 
 
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        <LoaderContextProvider>
+          <App />
+        </LoaderContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { GrFacebook } from "react-icons/gr";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthFooter from '../../components/AuthFooter/AuthFooter';
 import swal from 'sweetalert';
 import axios from 'axios';
-import 'react-toastify/dist/ReactToastify.css';
 import './../Login/Login.scss';
 import './Register.scss';
 
 const Register = () => {
+
+    // navigate
+    const navigate = useNavigate();
 
     // get all input data
     const [regInput, setRegInput] = useState({
@@ -41,14 +43,15 @@ const Register = () => {
                 .then(res => {
                   
                     setRegInput((prev) => ({
-                    name: '',
-                    email: '',
-                    username: '',
-                    password: ''
-                  }))
+                        name: '',
+                        email: '',
+                        username: '',
+                        password: ''
+                    }))
     
                   swal ( "Success" ,  "User has been successfully registered. Please login!" ,  "success" );
         
+                  
                 });
         
 
@@ -88,7 +91,7 @@ const Register = () => {
                 <br />
                 <p className='reg-form-text'>By Singing up, You agree to our <a href="">Terms</a>, <a href="">Privacy Policy</a> and <a href="">Cookies Policy</a></p>
 
-                <button type="submit" className='submit-btn'>Log In</button>
+                <button type="submit" className='submit-btn'>Register</button>
             </form>
 
 

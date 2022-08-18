@@ -3,29 +3,27 @@ import React, { useContext } from 'react';
 import { useState } from 'react';
 import { GrFacebook } from "react-icons/gr";
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import AuthFooter from '../../components/AuthFooter/AuthFooter';
 import cookie from 'js-cookie';
-import './Login.scss';
 import AuthContext from '../../context/AuthContext';
+import LoaderContext from '../../context/LoaderContext';
+import { createErrorToast } from '../../utility/toast';
+import './Login.scss';
+
 
 const Login = () => {
 
 
-    // reducer 
+    // auth context 
     const {dispatch} = useContext(AuthContext)
+
+    // loader context 
+    const {loaderDispatch} = useContext(LoaderContext)
 
     // navigate
     const navigate = useNavigate();
 
-    // create a toast
-    const createSuccessToast = (msg) => {
-        return toast.success(msg);
-    }
 
-    const createErrorToast = (msg) => {
-        return toast.error(msg);
-    }
 
         
     // loign data
@@ -64,17 +62,21 @@ const Login = () => {
                 })
                 .then(res => {
 
-                    cookie.set("token", res.data.token);
-                    cookie.set("user", JSON.stringify(res.data.user));
-                    dispatch({ type : 'LOGIN_USER', payload : res.data});
-                    navigate('/');
+                   if(res.data.user.isVerify){
 
-                    console.log(res.data);
+                    cookie.set("token", res.data.token);
+                    dispatch({ type : 'LOGIN_USER_SUCCESSS', payload : res.data.user});
+                    navigate('/');
+                    loaderDispatch({ type : 'LOADER_START'});
+
+                   }else {
+                    createErrorToast('Verify your account')
+                   }
+
+                    // console.log(res.data);
                 });
 
             }
-
-
     
         } catch (error) {
             createErrorToast('Invalid Eamil or Password');
@@ -85,18 +87,7 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-        {/* Toaster */}
-        <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-        />
+
         <div className="login-wrapper shadow-sm"> 
             <a className='login-logo-link' href="#">
                 <img className='login-logo' src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="" />
@@ -114,8 +105,8 @@ const Login = () => {
                 OR
             </div>
 
-            <a className='login-with-fb' href="#"><GrFacebook /> Login with Facebook</a>
-            <Link to="" className='forgot-password'>Forgot Password ? </Link>
+            <a href="#" className='login-with-fb'><GrFacebook /> Login with Facebook</a>
+            <Link to="/user/forgot-password" className='forgot-password'>Forgot Password ? </Link>
         </div>
 
 
