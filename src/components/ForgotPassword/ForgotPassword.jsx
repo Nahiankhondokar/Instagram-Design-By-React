@@ -38,10 +38,19 @@ const ForgotPassword = () => {
   const handleForgotPassForm = (e) => {
     e.preventDefault();
 
-    if( !forgotPass ){
-      createErrorToast('Feild is required')
+    // validation
+    if( forgotPass.user === '' || forgotPass.new_pass === '' || forgotPass.con_pass === '' ){
+      createErrorToast('Feild are required')
     }
 
+    if( forgotPass.new_pass !== forgotPass.con_pass ){
+       
+        createErrorToast('Password does not match')
+
+    }
+
+
+    // password update request to server
     axios.post('http://localhost:5050/api/users/forgot/password', forgotPass)
     .then(res => {
         
@@ -50,7 +59,7 @@ const ForgotPassword = () => {
 
     })
     .catch(error => {
-      createErrorToast('Password Changedd Failed')
+      createErrorToast('Invalid Email or Username')
       
     });
 
@@ -83,7 +92,7 @@ const ForgotPassword = () => {
           </div>
             
           <form onSubmit={ handleForgotPassForm } className='login-form'>
-            <input onChange={ handleInputValues } value={ forgotPass.user } name="user" type="email" className='login-input' placeholder='Email or Username'/>
+            <input onChange={ handleInputValues } value={ forgotPass.user } name="user" type="text" className='login-input' placeholder='Email or Username'/>
             <input onChange={ handleInputValues } value={ forgotPass.new_pass } name="new_pass" type="text" className='login-input' placeholder='New Password'/>
             <input onChange={ handleInputValues } value={ forgotPass.con_pass } name="con_pass" type="text" className='login-input' placeholder='Confirm Password'/>
             <br />

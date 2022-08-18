@@ -57,7 +57,7 @@ const Login = () => {
             }else{
 
                 await axios.post('http://localhost:5050/api/users/login', {
-                    email : loginData.auth,
+                    auth : loginData.auth,
                     password : loginData.password
                 })
                 .then(res => {
@@ -95,7 +95,7 @@ const Login = () => {
 
               
             <form onSubmit={ loginFromSubmitHandler } className='login-form'>
-                <input onChange={ userLoginHandler } value={loginData.auth} name="auth" type="text" className='login-input' placeholder='Phone number, username or email'/>
+                <input onChange={ userLoginHandler } value={loginData.auth} name="auth" type="text" className='login-input' placeholder='Email or Username'/>
                 <input onChange={ userLoginHandler } value={loginData.password} name="password" type="passwrod" className='login-input' placeholder='Passwrod'/>
                 <br />
                 <button type="submit" className='submit-btn'>Log In</button>
