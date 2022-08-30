@@ -5,6 +5,7 @@ import { BsThreeDots, BsEmojiSmile } from "react-icons/bs";
 import { AiOutlineHeart, AiOutlineComment } from "react-icons/ai";
 import { HiOutlineSaveAs } from "react-icons/hi";
 import { RiShareLine } from "react-icons/ri";
+import { MdVerified } from "react-icons/md";
 import AuthContext from '../../context/AuthContext';
 import cookie from 'js-cookie';
 import './Home.scss';
@@ -204,12 +205,69 @@ const Home = () => {
           </div>
 
           <div className="user-info">
-            <div className="user-personal-info">
-              <img src={ user.photo ? user.photo : 'https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg'} alt=""/>
-              <span><a href="#">{user.name}</a>{user.username}</span>
-            </div>
             
-            <a href="#" onClick={handleUserLogout}>Logout</a>
+              <div className="user-personal-info">
+                <div className="user-details">
+                  <img src={ user.photo ? user.photo : 'https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg'} alt=""/>
+                  <span><a href="#">{user.name}</a>{user.username}</span>
+                </div>
+                
+                <div className="user-switch-btn">
+                  <a href="#">Switch</a>
+                </div>
+              </div>
+              
+
+              <div className="insta-suggetion-area">
+                <p className="suggetion-tittle">Suggestions For You</p>
+                <a href='#' className="see-all-btn"> See All</a>
+              </div>
+
+              <div className="insta-suggetion-item">
+                <div className="suggetion-details">
+                  <img className='suggetion-logo' src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Chrome__logo.max-500x500.png" alt=""/>
+                  <span className="suggetion-item-tittle"><a href="#">Chrome <MdVerified /></a>Followed by Google</span>
+                </div>
+                
+                <div className="user-follow-btn">
+                  <a href="#">Follow</a>
+                </div>
+              </div>      
+
+              <div className="insta-suggetion-item">
+                <div className="suggetion-details">
+                  <img className='suggetion-logo' src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Chrome__logo.max-500x500.png" alt=""/>
+                  <span className="suggetion-item-tittle"><a href="#">Chrome <MdVerified /></a>Followed by Google</span>
+                </div>
+                
+                <div className="user-follow-btn">
+                  <a href="#">Follow</a>
+                </div>
+              </div>      
+            
+
+              <div className="insta-suggetion-item">
+                <div className="suggetion-details">
+                  <img className='suggetion-logo' src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Chrome__logo.max-500x500.png" alt=""/>
+                  <span className="suggetion-item-tittle"><a href="#">Chrome <MdVerified /></a>Followed by Google</span>
+                </div>
+                
+                <div className="user-follow-btn">
+                  <a href="#">Follow</a>
+                </div>
+              </div>   
+
+              <div className="insta-suggetion-item">
+                <div className="suggetion-details">
+                  
+                </div>
+                
+                <div className="user-follow-btn">
+                  <a href="#" onClick={handleUserLogout}><b>Log Out</b></a>
+                </div>
+              </div>    
+            
+            
           </div>
        </div>
       </div>

@@ -103,7 +103,7 @@ const ForgotPassword = () => {
               OR
           </div>
           
-          <Link to="" className='verify-terms'> Create New Account</Link>
+          <Link to="/register" className='verify-terms'> Create New Account</Link>
       </div>
 
 

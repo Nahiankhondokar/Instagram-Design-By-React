@@ -51,6 +51,7 @@ const Register = () => {
     
                   swal ( "Success" ,  "User has been successfully registered. Please login!" ,  "success" );
         
+                  navigate('/login');
                   
                 });
         
